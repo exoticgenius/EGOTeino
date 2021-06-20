@@ -47,9 +47,21 @@ namespace EGOTeino.Framework.UI
             Hide();
         }
 
+        /// <summary>
+        /// keeping order of setting panels for backward navgation
+        /// </summary>
         public Stack<Type> PanelStack = new Stack<Type>();
+        /// <summary>
+        /// languages store
+        /// </summary>
         public Dictionary _dictionary;
+        /// <summary>
+        /// setting items store
+        /// </summary>
         public SettingProvider _settingProvider;
+        /// <summary>
+        /// hook for shortcut keys
+        /// </summary>
         public HookManager _hookManager;
         public SettingForm(Dictionary dataSet, SettingProvider settingProvider, HookManager hookManager)
         {
@@ -67,6 +79,13 @@ namespace EGOTeino.Framework.UI
             Sync();
         }
 
+        /// <summary>
+        /// keep the state of last showing panel in setting window
+        /// create on opening
+        /// stack and dispose on closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SettingForm_VisibleChanged(object sender, EventArgs e)
         {
             if (Visible)
@@ -79,7 +98,11 @@ namespace EGOTeino.Framework.UI
                 PanelContainer.Controls[0].Dispose();
             }
         }
-
+        /// <summary>
+        /// prevent destroy window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Setting_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -89,7 +112,11 @@ namespace EGOTeino.Framework.UI
                 Hide();
             }
         }
-
+        /// <summary>
+        /// dispose top most panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_back_Click(object sender, EventArgs e)
         {
             foreach (IControlPanel item in PanelContainer.Controls)
@@ -97,6 +124,12 @@ namespace EGOTeino.Framework.UI
                 item.Dispose();
             }
         }
+        /// <summary>
+        /// when one panel get disposed this method fires
+        /// peek the last panel in stack to change the state of back button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PanelContainer_ControlRemoved(object sender, ControlEventArgs e)
         {
             backbtn(true);
@@ -112,7 +145,10 @@ namespace EGOTeino.Framework.UI
             if (Visible)
                 CreatePanel();
         }
-
+        /// <summary>
+        /// pops the last panel in stack and construct and show in window as top most panel
+        /// and sets the title of setting window
+        /// </summary>
         private void CreatePanel()
         {
             Control c = (Control)Activator.CreateInstance(PanelStack.Pop(), this);
@@ -120,6 +156,10 @@ namespace EGOTeino.Framework.UI
             lbl_head.Text = c.Tag.ToString();
         }
 
+        /// <summary>
+        /// back button state changer and push window title
+        /// </summary>
+        /// <param name="show"></param>
         private void backbtn(bool show)
         {
             btn_back.Visible = show;

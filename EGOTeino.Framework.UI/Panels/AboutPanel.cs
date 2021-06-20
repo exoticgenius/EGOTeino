@@ -24,6 +24,7 @@ namespace EGOTeino.Framework.UI
         private void Confirm_Click(object sender, EventArgs e)
         {
             Dispose();
+            GC.Collect();
         }
     }
 }

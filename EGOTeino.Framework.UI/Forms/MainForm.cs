@@ -148,7 +148,7 @@ namespace EGOTeino.Framework.UI
             this.lbl_head = new EGO.SolidUI.FirstLabel();
             this.btn_Close = new EGO.SolidUI.FirstButton();
             this.txt_Content = new EGO.SolidUI.FirstTextbox();
-            this.btn_Currect = new EGO.SolidUI.FirstButton();
+            this.btn_Correct = new EGO.SolidUI.FirstButton();
             this.btn_Setting = new EGO.SolidUI.FirstButton();
             this.SuspendLayout();
             // 
@@ -237,32 +237,32 @@ namespace EGOTeino.Framework.UI
             // 
             // btn_Currect
             // 
-            this.btn_Currect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_Currect.BackColor = System.Drawing.Color.Teal;
-            this.btn_Currect.DarkTheme = false;
-            this.btn_Currect.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
-            this.btn_Currect.FlatAppearance.BorderSize = 0;
-            this.btn_Currect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
-            this.btn_Currect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
-            this.btn_Currect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Currect.Font = new System.Drawing.Font("Segoe UI Light", 12F);
-            this.btn_Currect.FontSize = 12F;
-            this.btn_Currect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
-            this.btn_Currect.Inverted = false;
-            this.btn_Currect.Location = new System.Drawing.Point(10, 252);
-            this.btn_Currect.ManualDarkTheme = false;
-            this.btn_Currect.ManualInvert = false;
-            this.btn_Currect.ManualThemeColor = false;
-            this.btn_Currect.Margin = new System.Windows.Forms.Padding(5);
-            this.btn_Currect.Name = "btn_Currect";
-            this.btn_Currect.ReverseDarkTheme = false;
-            this.btn_Currect.ReverseInvertAction = false;
-            this.btn_Currect.Size = new System.Drawing.Size(100, 38);
-            this.btn_Currect.TabIndex = 5;
-            this.btn_Currect.Text = "Currect";
-            this.btn_Currect.ThemeColor = System.Drawing.Color.Teal;
-            this.btn_Currect.UseVisualStyleBackColor = false;
-            this.btn_Currect.Click += new System.EventHandler(this.Btn_Currect_Click);
+            this.btn_Correct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_Correct.BackColor = System.Drawing.Color.Teal;
+            this.btn_Correct.DarkTheme = false;
+            this.btn_Correct.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.btn_Correct.FlatAppearance.BorderSize = 0;
+            this.btn_Correct.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.btn_Correct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
+            this.btn_Correct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Correct.Font = new System.Drawing.Font("Segoe UI Light", 12F);
+            this.btn_Correct.FontSize = 12F;
+            this.btn_Correct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.btn_Correct.Inverted = false;
+            this.btn_Correct.Location = new System.Drawing.Point(10, 252);
+            this.btn_Correct.ManualDarkTheme = false;
+            this.btn_Correct.ManualInvert = false;
+            this.btn_Correct.ManualThemeColor = false;
+            this.btn_Correct.Margin = new System.Windows.Forms.Padding(5);
+            this.btn_Correct.Name = "btn_Correct";
+            this.btn_Correct.ReverseDarkTheme = false;
+            this.btn_Correct.ReverseInvertAction = false;
+            this.btn_Correct.Size = new System.Drawing.Size(100, 38);
+            this.btn_Correct.TabIndex = 5;
+            this.btn_Correct.Text = "Correct";
+            this.btn_Correct.ThemeColor = System.Drawing.Color.Teal;
+            this.btn_Correct.UseVisualStyleBackColor = false;
+            this.btn_Correct.Click += new System.EventHandler(this.Btn_Currect_Click);
             // 
             // btn_Setting
             // 
@@ -299,7 +299,7 @@ namespace EGOTeino.Framework.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 300);
             this.Controls.Add(this.btn_Setting);
-            this.Controls.Add(this.btn_Currect);
+            this.Controls.Add(this.btn_Correct);
             this.Controls.Add(this.txt_Content);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.lbl_head);
@@ -322,7 +322,7 @@ namespace EGOTeino.Framework.UI
         private EGO.SolidUI.FirstLabel lbl_head;
         private EGO.SolidUI.FirstButton btn_Close;
         private EGO.SolidUI.FirstTextbox txt_Content;
-        private EGO.SolidUI.FirstButton btn_Currect;
+        private EGO.SolidUI.FirstButton btn_Correct;
         private EGO.SolidUI.FirstButton btn_Setting;
         #endregion
     }

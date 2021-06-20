@@ -118,7 +118,7 @@ namespace EGOTeino.Framework.Core
         }
 
         /// <summary>
-        /// sort again codeand char sorted lists
+        /// sort again code and char sorted lists
         /// </summary>
         public void SortAll()
         {

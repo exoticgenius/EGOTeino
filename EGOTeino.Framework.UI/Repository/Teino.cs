@@ -15,15 +15,42 @@ namespace EGOTeino.Framework.UI
 {
     public class Teino
     {
+        /// <summary>
+        /// root database location
+        /// </summary>
         private string DBName;
+        /// <summary>
+        /// main app database
+        /// </summary>
         public DataSet DataSet { get; set; }
+        /// <summary>
+        /// main ap setting
+        /// </summary>
         public SettingProvider SettingProvider { get; set; }
+        /// <summary>
+        /// main hook manager
+        /// </summary>
         public HookManager HookManager { get; set; }
+        /// <summary>
+        /// main action core
+        /// </summary>
         public MainCore MainCore { get; set; }
+        /// <summary>
+        /// very first form of app
+        /// </summary>
         public MainForm MainForm { get; set; }
+        /// <summary>
+        /// setting form instance
+        /// </summary>
         public SettingForm Setting { get; set; }
+        /// <summary>
+        /// tray icon
+        /// </summary>
         public TeinoNotify Notify { get; set; }
 
+        /// <summary>
+        /// read database file and initialize it
+        /// </summary>
         public void InitialDatabase()
         {
             DBName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "EGO", "Teino", "Database");
@@ -49,6 +76,9 @@ namespace EGOTeino.Framework.UI
 
             SettingProvider = new SettingProvider(DataSet.GearBox);
         }
+        /// <summary>
+        /// save all datatabse changes and write to database file
+        /// </summary>
         public void FinalDatabase()
         {
             using (StreamWriter sw = new StreamWriter(File.Create(DBName)))
@@ -57,7 +87,11 @@ namespace EGOTeino.Framework.UI
             }
 
             SettingProvider = null;
+            GC.Collect();
         }
+        /// <summary>
+        /// create all needed form and classes for launching teino
+        /// </summary>
         public void InitialUI()
         {
             InitialTheme();
@@ -67,6 +101,9 @@ namespace EGOTeino.Framework.UI
             MainForm = new MainForm(Setting, MainCore);
             Notify = new TeinoNotify(MainForm, Setting, SettingProvider);
         }
+        /// <summary>
+        /// dispose forms and set classes to null to free memory
+        /// </summary>
         public void FinalUI()
         {
             HookManager.TryUnsubscribeFromGlobalMouseEvents();
@@ -76,7 +113,11 @@ namespace EGOTeino.Framework.UI
             MainCore = null;
             Setting.Dispose();
             HookManager = null;
+            GC.Collect();
         }
+        /// <summary>
+        /// bind events to objects to control app flow
+        /// </summary>
         public void InitialEvents()
         {
             DataSet.AttributeChangedStatic += DataSet_AttributeChangedStatic;
@@ -84,6 +125,9 @@ namespace EGOTeino.Framework.UI
             HookManager.KeyDown += MainCore.GlobalEventProvider_KeyDown;
             HookManager.KeyUp += MainCore.GlobalEventProvider_KeyUp;
         }
+        /// <summary>
+        /// unbind events to objects to prevent throw and GC deadlock
+        /// </summary>
         public void FinalEvents()
         {
             DataSet.AttributeChangedStatic -= DataSet_AttributeChangedStatic;
@@ -91,7 +135,9 @@ namespace EGOTeino.Framework.UI
             HookManager.KeyDown -= MainCore.GlobalEventProvider_KeyDown;
             HookManager.KeyUp -= MainCore.GlobalEventProvider_KeyUp;
         }
-
+        /// <summary>
+        /// saves the theme when user changes the values
+        /// </summary>
         public void SolidSettings_SetStyleCalled()
         {
             SettingProvider.ThemeColor = SolidSettings.ThemeColor;
@@ -100,6 +146,9 @@ namespace EGOTeino.Framework.UI
             SettingProvider.DarkTheme = SolidSettings.DarkTheme;
             SettingProvider.InvertedTheme = SolidSettings.Inverted;
         }
+        /// <summary>
+        /// get theme setting from provider and apply to app
+        /// </summary>
         public void InitialTheme()
         {
             SolidSettings.ThemeColor_NoTrigger = SettingProvider.ThemeColor;
@@ -108,6 +157,12 @@ namespace EGOTeino.Framework.UI
             SolidSettings.DarkTheme_NoTrigger = SettingProvider.DarkTheme;
             SolidSettings.Inverted_NoTrigger = SettingProvider.InvertedTheme;
         }
+        /// <summary>
+        /// top most events in app to control top most state and capturing state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="parameter1"></param>
+        /// <param name="parameter2"></param>
         public void DataSet_AttributeChangedStatic(Fractal.INode sender, string parameter1, int parameter2)
         {
             if (sender is Gear g)

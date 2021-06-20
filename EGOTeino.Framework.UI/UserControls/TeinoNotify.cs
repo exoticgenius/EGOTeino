@@ -13,7 +13,7 @@ namespace EGOTeino.Framework.UI
         private MainForm _mainForm;
         private SettingForm _settingForm;
         private SettingProvider _settingProvider;
-        public TeinoNotify(MainForm main,SettingForm setting,SettingProvider settingProvider)
+        public TeinoNotify(MainForm main, SettingForm setting, SettingProvider settingProvider)
         {
             _mainForm = main;
             _settingForm = setting;
@@ -43,7 +43,7 @@ namespace EGOTeino.Framework.UI
                     show.Click += Show_Click;
                     setting.Click += Setting_Click;
                     exit.Click += Exit_Click;
-                    selectorPopup.ShowDialog(show,setting,exit);
+                    selectorPopup.ShowDialog(show, setting, exit);
                 }
             }
         }
@@ -62,7 +62,8 @@ namespace EGOTeino.Framework.UI
         {
             _mainForm.Show();
             _mainForm.TopMost = true;
-            _mainForm.TopMost = false;
+            if (!_settingProvider.TopMost)
+                _mainForm.TopMost = false;
         }
         private void ShowSetting()
         {

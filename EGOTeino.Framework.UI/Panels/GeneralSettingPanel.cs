@@ -32,14 +32,23 @@ namespace EGOTeino.Framework.UI
         {
             _setting.Hide();
         }
-
+        /// <summary>
+        /// navigate to language setting panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Extra_Click(object sender, EventArgs e)
         {
             _setting.PanelStack.Push(this.GetType());
             _setting.PanelStack.Push(typeof(LanguageSettingPanel));
             this.Dispose();
+            GC.Collect();
         }
-
+        /// <summary>
+        /// opens theme setting
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_theme_Click(object sender, EventArgs e)
         {
             SolidSettings.ThemeSelector.Show();
@@ -64,7 +73,11 @@ namespace EGOTeino.Framework.UI
         {
             _setting._settingProvider.ConfirmOperation = swb_operationConfirm.Enable;
         }
-
+        /// <summary>
+        /// create popup of languages to show to user for primary language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_first_Click(object sender, EventArgs e)
         {
             List<Control> lst = new List<Control>();
@@ -81,12 +94,19 @@ namespace EGOTeino.Framework.UI
             }
             ValidateLabels();
         }
+        /// <summary>
+        /// set language labels to current state
+        /// </summary>
         private void ValidateLabels()
         {
             lbl_first.Text = $"First language: {_setting._dictionary.FirstLanguage?.Name ?? string.Empty}";
             lbl_second.Text = $"Second language: {_setting._dictionary.SecondLanguage?.Name ?? string.Empty}";
         }
-
+        /// <summary>
+        /// create popup of languages to show to user for secondary language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_second_Click(object sender, EventArgs e)
         {
             List<Control> lst = new List<Control>();
@@ -103,19 +123,29 @@ namespace EGOTeino.Framework.UI
             }
             ValidateLabels();
         }
-
+        /// <summary>
+        /// navigate to guide panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_advanced_Click(object sender, EventArgs e)
         {
             _setting.PanelStack.Push(this.GetType());
             _setting.PanelStack.Push(typeof(GuidePanel));
             this.Dispose();
+            GC.Collect();
         }
-
+        /// <summary>
+        /// navigate to about panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Extra3_Click(object sender, EventArgs e)
         {
             _setting.PanelStack.Push(this.GetType());
             _setting.PanelStack.Push(typeof(AboutPanel));
             this.Dispose();
+            GC.Collect();
         }
     }
 }

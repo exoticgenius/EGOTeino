@@ -1,5 +1,7 @@
 ﻿using EGOTeino.Framework.Core;
+
 using Hook;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +26,11 @@ namespace EGOTeino.Framework.UI
             _hookmanager = hookManager;
             _settingProvider = settingProvider;
         }
-
+        /// <summary>
+        /// detemine usage of both control keys
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void GlobalEventProvider_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.LControlKey)
@@ -36,6 +42,11 @@ namespace EGOTeino.Framework.UI
                 RCtrl = true;
             }
         }
+        /// <summary>
+        /// take action when both control key are pressed down
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void GlobalEventProvider_KeyUp(object sender, KeyEventArgs e)
         {
             bool tr = RCtrl;
@@ -58,16 +69,31 @@ namespace EGOTeino.Framework.UI
                     {
                         Perform();
                     }
+                    else
+                    {
+                        Task.Run(() => MessageBox.Show(
+                    "one or both of main languages may be not set or duplicated",
+                    "fix language settings",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error));
+
+                    }
                 }
             }
         }
-
+        /// <summary>
+        /// check for first and second language in setting to make sure they are configured correctly
+        /// </summary>
+        /// <returns></returns>
         public bool WrongLanguage()
         {
             return _core.Dictionary.FirstLanguage == null ||
                    _core.Dictionary.SecondLanguage == null ||
                    _core.Dictionary.FirstLanguage == _core.Dictionary.SecondLanguage;
         }
+        /// <summary>
+        /// suspend hook manager until the action gets done and get content from clipboard
+        /// </summary>
         private void Perform()
         {
             lock (_core)
@@ -79,12 +105,17 @@ namespace EGOTeino.Framework.UI
                 _hookmanager.Suspended = false;
             }
         }
+        /// <summary>
+        /// check system language and decide to choose which languages to perform action
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public string Action(string data)
         {
             if (string.IsNullOrWhiteSpace(data)) return "ERROR";
 
-            Language dest = null;
-            Language src = null;
+            Language ConvertFrom = null;
+            Language ConvertTo = null;
 
             if (_settingProvider.ConfirmOperation)
             {
@@ -92,56 +123,56 @@ namespace EGOTeino.Framework.UI
                 {
                     if (sp.ShowDialog(_core.Dictionary.PullChildren<Language>().ToArray()) == DialogResult.OK)
                     {
-                        src = sp.Tag as Language;
+                        ConvertTo = sp.Tag as Language;
                     }
                     else
                     {
-                        dest = _core.Dictionary.Getlanguage(API.GetKeyboardLanguage());
+                        ConvertFrom = _core.Dictionary.Getlanguage(API.GetKeyboardLanguage());
                     }
                 }
             }
             else
             {
-                dest = _core.Dictionary.Getlanguage(API.GetKeyboardLanguage());
+                ConvertFrom = _core.Dictionary.Getlanguage(API.GetKeyboardLanguage());
             }
 
-            if (src == null && dest == null)
+            if (ConvertTo == null && ConvertFrom == null)
             {
-                dest = _core.Dictionary.FirstLanguage;
-                src = _core.Dictionary.SecondLanguage;
+                ConvertFrom = _core.Dictionary.FirstLanguage;
+                ConvertTo = _core.Dictionary.SecondLanguage;
             }
-            else if(src == null && dest != null)
+            else if (ConvertTo == null)
             {
-                if(dest == _core.Dictionary.FirstLanguage)
+                if (ConvertFrom == _core.Dictionary.FirstLanguage)
                 {
-                    src = _core.Dictionary.SecondLanguage;
+                    ConvertTo = _core.Dictionary.SecondLanguage;
                 }
-                else if(dest == _core.Dictionary.SecondLanguage)
+                else if (ConvertFrom == _core.Dictionary.SecondLanguage)
                 {
-                    src = _core.Dictionary.FirstLanguage;
+                    ConvertTo = _core.Dictionary.FirstLanguage;
                 }
                 else
                 {
-                    src = _core.Dictionary.FirstLanguage;
+                    ConvertTo = _core.Dictionary.FirstLanguage;
                 }
             }
-            else if (src != null && dest == null)
+            else if (ConvertFrom == null)
             {
-                if (src == _core.Dictionary.FirstLanguage)
+                if (ConvertTo == _core.Dictionary.FirstLanguage)
                 {
-                    dest = _core.Dictionary.SecondLanguage;
+                    ConvertFrom = _core.Dictionary.SecondLanguage;
                 }
-                else if (src == _core.Dictionary.SecondLanguage)
+                else if (ConvertTo == _core.Dictionary.SecondLanguage)
                 {
-                    dest = _core.Dictionary.FirstLanguage;
+                    ConvertFrom = _core.Dictionary.FirstLanguage;
                 }
                 else
                 {
-                    dest = _core.Dictionary.FirstLanguage;
+                    ConvertFrom = _core.Dictionary.FirstLanguage;
                 }
             }
 
-            data = _core.InsideOut(data, dest, src);
+            data = _core.InsideOut(data, ConvertFrom, ConvertTo);
 
             return data;
         }

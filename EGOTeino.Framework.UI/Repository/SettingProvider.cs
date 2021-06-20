@@ -8,6 +8,9 @@ using System.Text;
 
 namespace EGOTeino.Framework.UI
 {
+    /// <summary>
+    /// setting store
+    /// </summary>
     public class SettingProvider
     {
         public const string TopMost_AccessName = "TopMost";

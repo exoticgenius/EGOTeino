@@ -57,7 +57,7 @@
     <ApplicationIcon>Resources\MainIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>F8FB455691498C2081F5064065C1896DF51F5FA8</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>E324AE2347888FB5A1E0D8CF3C49CBA3971F72E2</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>EGOTeino.Framework.UI_TemporaryKey.pfx</ManifestKeyFile>

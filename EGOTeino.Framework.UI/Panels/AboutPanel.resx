@@ -118,10 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="firstLabel1.Text" xml:space="preserve">
-    <value>Written by farshad sadeghi leader of Exotic genius team
+    <value>Written by farshad sadeghi
 
 this software is protected by trademark and other pending or existing intellectual property rights in Iran and other countries/regions.
 Contact us:
+
 Exoticgenius@outlook.com
 support.Teino.ir
 </value>

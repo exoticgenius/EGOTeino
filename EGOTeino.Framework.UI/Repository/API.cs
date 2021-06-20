@@ -10,11 +10,17 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace EGOTeino.Framework.UI
 {
     public static class API
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static string GetKeyboardLanguage()
         {
             string currentLang = "";
@@ -23,11 +29,16 @@ namespace EGOTeino.Framework.UI
             thread.Join();
             return currentLang;
         }
+
+        /// <summary>
+        /// check if the pressed key in keyboard will write a character
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static bool IsWritable(this Keys key)
         {
             bool ok = false;
             int code = (int)key;
-
             // top row 0-9
             if (code > 47 && code < 58) ok = true;
             // A-Z
@@ -43,6 +54,10 @@ namespace EGOTeino.Framework.UI
 
             return ok;
         }
+        /// <summary>
+        /// reduce the width of control to prevent showing horizontal scroll
+        /// </summary>
+        /// <param name="sender"></param>
         public static void FixScroll(this Control sender)
         {
             if (sender is ScrollableControl sc)
@@ -69,6 +84,11 @@ namespace EGOTeino.Framework.UI
                         }
                     }
         }
+        /// <summary>
+        /// generates an item control for language addtion panel by key item
+        /// </summary>
+        /// <param name="parameter1"></param>
+        /// <returns></returns>
         public static SelectableLabel GenerateInterfaceForAdditionPanel(this KeyItem parameter1)
         {
             SelectableLabel lbl = new SelectableLabel(parameter1);
@@ -78,6 +98,11 @@ namespace EGOTeino.Framework.UI
             lbl.TextAlign = ContentAlignment.MiddleCenter;
             return lbl;
         }
+        /// <summary>
+        /// generates an item control for language addtion panel by language
+        /// </summary>
+        /// <param name="parameter1"></param>
+        /// <returns></returns>
         public static SelectableLabel GenerateInterfaceForLanguagePanel(this Language parameter1)
         {
             SelectableLabel lbl = new SelectableLabel(parameter1);
@@ -87,6 +112,11 @@ namespace EGOTeino.Framework.UI
             lbl.TextAlign = ContentAlignment.MiddleCenter;
             return lbl;
         }
+        /// <summary>
+        /// generate button for language to use in pop up
+        /// </summary>
+        /// <param name="parameter1"></param>
+        /// <returns></returns>
         public static ThirdButton GenerateInterfaceForPopUp(this Language parameter1)
         {
             ThirdButton lbl = new ThirdButton();
@@ -98,6 +128,11 @@ namespace EGOTeino.Framework.UI
             lbl.ReverseInvertAction = true;
             return lbl;
         }
+        /// <summary>
+        /// generate button for custom use like tray icon menu
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static ThirdButton GenerateInterfaceForPopUp(string text)
         {
             ThirdButton lbl = new ThirdButton();

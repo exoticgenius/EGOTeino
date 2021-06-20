@@ -31,7 +31,7 @@ namespace EGOTeino.Framework.UI
             {
                 foreach (var item in Parent.Controls)
                 {
-                    if (item is SelectableLabel sl)
+                    if (item is SelectableLabel sl && sl.Selected)
                     {
                         sl.Selected = false;
                     }

@@ -17,7 +17,7 @@ namespace EGOTeino.Framework.UI
 {
     public partial class LanguageAdditionPanel : IControlPanel
     {
-        HookManager eventProvider =new HookManager();
+        HookManager eventProvider = new HookManager();
         private Language lng;
         bool shiftDown = false;
         SettingForm _setting;
@@ -42,7 +42,9 @@ namespace EGOTeino.Framework.UI
 
             FillList();
         }
-
+        /// <summary>
+        /// fill list with language characters
+        /// </summary>
         private void FillList()
         {
             foreach (var item in lng.PullChildren())
@@ -50,18 +52,29 @@ namespace EGOTeino.Framework.UI
                 lst_keys.Controls.Add(API.GenerateInterfaceForAdditionPanel((KeyItem)item));
             }
         }
-
+        /// <summary>
+        /// turn off teino shortcuts to edit language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LanguageAdditionPanel_VisibleChanged(object sender, EventArgs e)
         {
-            if (Visible) _setting._hookManager.Suspended = true;
-            else _setting._hookManager.Suspended = false;
+            _setting._hookManager.Suspended = Visible;
         }
-
+        /// <summary>
+        /// if list overflows this method fix the width of controls to prevent showing horizontal scroll
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Lst_keys_ControlChanged(object sender, ControlEventArgs e)
         {
             lst_keys.FixScroll();
         }
-
+        /// <summary>
+        /// removes character control when character get removed from database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="parameter1"></param>
         private void Lng_RemovedChild(INode sender, INode parameter1)
         {
             foreach (var item in lst_keys.Controls)
@@ -72,12 +85,20 @@ namespace EGOTeino.Framework.UI
                 }
             }
         }
-
+        /// <summary>
+        /// adds character control when character get added to database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="parameter1"></param>
         private void Lng_AddedChild(INode sender, INode parameter1)
         {
-           lst_keys.Controls.Add( API.GenerateInterfaceForAdditionPanel((KeyItem)parameter1));
+            lst_keys.Controls.Add(API.GenerateInterfaceForAdditionPanel((KeyItem)parameter1));
         }
-
+        /// <summary>
+        /// determine shift usage for capturing character and clear the textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EventProvider_KeyDown(object sender, KeyEventArgs e)
         {
             lock (lng)
@@ -89,7 +110,11 @@ namespace EGOTeino.Framework.UI
                 if (e.KeyCode.IsWritable()) txt_current_keyChar.Textes = "";
             }
         }
-
+        /// <summary>
+        /// captures the entered character and adds to language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EventProvider_KeyUp(object sender, KeyEventArgs e)
         {
             lock (lng)
@@ -119,13 +144,13 @@ namespace EGOTeino.Framework.UI
                             lbl_shiftUsed.Text = $"Shift used: {(shiftDown ? "yes" : "no")}";
                         }
                     }
-                    else if(API.GetKeyboardLanguage() != lng.Name)
+                    else if (API.GetKeyboardLanguage() != lng.Name)
                     {
                         lbl_keyCode.Text = $"Input method violation";
                         lbl_keyChar.Text = "not same keyboard language";
                         lbl_shiftUsed.Text = "Change your keyboard language";
                     }
-                    else if(!txt_current_keyChar.Focused)
+                    else if (!txt_current_keyChar.Focused)
                     {
                         txt_current_keyChar.Focus();
                         lbl_keyCode.Text = $"enter last key you tried to";
@@ -142,11 +167,17 @@ namespace EGOTeino.Framework.UI
                 }
             }
         }
-
+        /// <summary>
+        /// when destroying detach events from database to prevent throwing exceptions
+        /// change state of the main hook manager
+        /// and destroy the local hook manager
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnHandleDestroyed(EventArgs e)
         {
             eventProvider.KeyDown -= EventProvider_KeyDown;
             eventProvider.KeyUp -= EventProvider_KeyUp;
+            eventProvider.ForceUnsunscribeFromGlobalKeyboardEvents();
             lng.AddedChild -= Lng_AddedChild;
             lng.RemovedChild -= Lng_RemovedChild;
             lng.SortAll();
@@ -157,8 +188,13 @@ namespace EGOTeino.Framework.UI
         private void Confirm_Click(object sender, EventArgs e)
         {
             Dispose();
+            GC.Collect();
         }
-
+        /// <summary>
+        /// removing selected character
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_RemoveSelectedKey_Click(object sender, EventArgs e)
         {
             foreach (var item in lst_keys.Controls)
@@ -169,12 +205,17 @@ namespace EGOTeino.Framework.UI
                 }
             }
         }
-
+        /// <summary>
+        /// opens andvanced setting for current language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_advanced_Click(object sender, EventArgs e)
         {
-            _setting.PanelStack.Push(this.GetType()); 
+            _setting.PanelStack.Push(this.GetType());
             _setting.PanelStack.Push(typeof(AdvancedLanguageSettingPanel));
             this.Dispose();
+            GC.Collect();
         }
     }
 }

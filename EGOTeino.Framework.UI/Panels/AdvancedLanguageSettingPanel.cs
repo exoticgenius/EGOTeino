@@ -30,7 +30,9 @@ namespace EGOTeino.Framework.UI
             lbl_lang_name.Text = $"Language: {lng.Name}";
             FillList();
         }
-
+        /// <summary>
+        /// fills the language characters list
+        /// </summary>
         private void FillList()
         {
             foreach (var item in lng.PullChildren<KeyItem>())
@@ -40,11 +42,21 @@ namespace EGOTeino.Framework.UI
                 lst_keys.Controls.Add(x);
             }
         }
+        /// <summary>
+        /// if list overflows this method fix the width of controls to prevent showing horizontal scroll
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Lst_keys_ControlChanged(object sender, ControlEventArgs e)
         {
             lst_keys.FixScroll();
         }
 
+        /// <summary>
+        /// event attached to each character control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void X_Click(object sender, MouseEventArgs e)
         {
             KeyItem key = (KeyItem)((SelectableLabel)sender).Tag;
@@ -56,8 +68,13 @@ namespace EGOTeino.Framework.UI
         private void firstButton1_Click(object sender, EventArgs e)
         {
             this.Dispose();
+            GC.Collect();
         }
-
+        /// <summary>
+        /// adds new character to language
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Add_Click(object sender, EventArgs e)
         {
             if (!Tools.IsNum(txt_keycode.Textes) || string.IsNullOrWhiteSpace(txt_keychar.Textes)) return;
@@ -66,6 +83,10 @@ namespace EGOTeino.Framework.UI
             key.KeyChar = txt_keychar.Textes;
             lng.AddKey(key);
         }
+        /// <summary>
+        /// when destroying detach events from database to prevent throwing exceptions
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnHandleDestroyed(EventArgs e)
         {
             _setting._dictionary.AddedChild -= Lng_AddedChild;
@@ -73,7 +94,11 @@ namespace EGOTeino.Framework.UI
             lng.SortAll();
             base.OnHandleDestroyed(e);
         }
-
+        /// <summary>
+        /// removes character control when character get removed from database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="parameter1"></param>
         private void Lng_RemovedChild(INode sender, INode parameter1)
         {
             foreach (var item in lst_keys.Controls)
@@ -84,14 +109,22 @@ namespace EGOTeino.Framework.UI
                 }
             }
         }
-
+        /// <summary>
+        /// adds character control when character get added to database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="parameter1"></param>
         private void Lng_AddedChild(INode sender, INode parameter1)
         {
             var x = API.GenerateInterfaceForAdditionPanel((KeyItem)parameter1);
             x.MouseClick += X_Click;
             lst_keys.Controls.Add(x);
         }
-
+        /// <summary>
+        /// edit partecular character where selected by user in list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Edit_Click(object sender, EventArgs e)
         {
             foreach (SelectableLabel item in lst_keys.Controls)
@@ -107,7 +140,11 @@ namespace EGOTeino.Framework.UI
                 }
             }
         }
-
+        /// <summary>
+        /// removing selected character
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Remove_Click(object sender, EventArgs e)
         {
             foreach (var item in lst_keys.Controls)

@@ -149,7 +149,7 @@
             this.firstLabel3.Name = "firstLabel3";
             this.firstLabel3.ReverseDarkTheme = false;
             this.firstLabel3.ReverseInvertAction = false;
-            this.firstLabel3.Size = new System.Drawing.Size(492, 175);
+            this.firstLabel3.Size = new System.Drawing.Size(494, 200);
             this.firstLabel3.TabIndex = 2;
             this.firstLabel3.Text = resources.GetString("firstLabel3.Text");
             this.firstLabel3.ThemeColor = System.Drawing.Color.Empty;

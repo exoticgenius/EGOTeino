@@ -79,9 +79,9 @@
             this.lbl_first.Name = "lbl_first";
             this.lbl_first.ReverseDarkTheme = false;
             this.lbl_first.ReverseInvertAction = false;
-            this.lbl_first.Size = new System.Drawing.Size(167, 32);
+            this.lbl_first.Size = new System.Drawing.Size(205, 32);
             this.lbl_first.TabIndex = 0;
-            this.lbl_first.Text = "First language: ";
+            this.lbl_first.Text = "Primary language: ";
             this.lbl_first.ThemeColor = System.Drawing.Color.Empty;
             // 
             // firstFlowPanel1
@@ -123,7 +123,7 @@
             this.btn_first.Font = new System.Drawing.Font("Segoe UI Light", 12F);
             this.btn_first.FontSize = 12F;
             this.btn_first.Inverted = true;
-            this.btn_first.Location = new System.Drawing.Point(187, 10);
+            this.btn_first.Location = new System.Drawing.Point(225, 10);
             this.btn_first.ManualDarkTheme = false;
             this.btn_first.ManualInvert = false;
             this.btn_first.ManualThemeColor = false;
@@ -183,9 +183,9 @@
             this.lbl_second.Name = "lbl_second";
             this.lbl_second.ReverseDarkTheme = false;
             this.lbl_second.ReverseInvertAction = false;
-            this.lbl_second.Size = new System.Drawing.Size(201, 32);
+            this.lbl_second.Size = new System.Drawing.Size(233, 32);
             this.lbl_second.TabIndex = 0;
-            this.lbl_second.Text = "Second language: ";
+            this.lbl_second.Text = "Secondary language: ";
             this.lbl_second.ThemeColor = System.Drawing.Color.Empty;
             // 
             // btn_second
@@ -200,7 +200,7 @@
             this.btn_second.Font = new System.Drawing.Font("Segoe UI Light", 12F);
             this.btn_second.FontSize = 12F;
             this.btn_second.Inverted = true;
-            this.btn_second.Location = new System.Drawing.Point(221, 10);
+            this.btn_second.Location = new System.Drawing.Point(253, 10);
             this.btn_second.ManualDarkTheme = false;
             this.btn_second.ManualInvert = false;
             this.btn_second.ManualThemeColor = false;
@@ -260,9 +260,9 @@
             this.firstLabel3.Name = "firstLabel3";
             this.firstLabel3.ReverseDarkTheme = false;
             this.firstLabel3.ReverseInvertAction = false;
-            this.firstLabel3.Size = new System.Drawing.Size(105, 32);
+            this.firstLabel3.Size = new System.Drawing.Size(156, 32);
             this.firstLabel3.TabIndex = 0;
-            this.firstLabel3.Text = "Top most";
+            this.firstLabel3.Text = "Always on top";
             this.firstLabel3.ThemeColor = System.Drawing.Color.Empty;
             // 
             // swb_topMost
@@ -271,7 +271,7 @@
             this.swb_topMost.DarkTheme = false;
             this.swb_topMost.Enable = false;
             this.swb_topMost.Inverted = false;
-            this.swb_topMost.Location = new System.Drawing.Point(129, 14);
+            this.swb_topMost.Location = new System.Drawing.Point(180, 14);
             this.swb_topMost.ManualDarkTheme = false;
             this.swb_topMost.ManualInvert = false;
             this.swb_topMost.ManualThemeColor = false;
@@ -327,9 +327,9 @@
             this.firstLabel4.Name = "firstLabel4";
             this.firstLabel4.ReverseDarkTheme = false;
             this.firstLabel4.ReverseInvertAction = false;
-            this.firstLabel4.Size = new System.Drawing.Size(95, 32);
+            this.firstLabel4.Size = new System.Drawing.Size(191, 32);
             this.firstLabel4.TabIndex = 0;
-            this.firstLabel4.Text = "Capture";
+            this.firstLabel4.Text = "Use shortcut keys";
             this.firstLabel4.ThemeColor = System.Drawing.Color.Empty;
             // 
             // swb_capture
@@ -338,7 +338,7 @@
             this.swb_capture.DarkTheme = false;
             this.swb_capture.Enable = false;
             this.swb_capture.Inverted = false;
-            this.swb_capture.Location = new System.Drawing.Point(119, 14);
+            this.swb_capture.Location = new System.Drawing.Point(215, 14);
             this.swb_capture.ManualDarkTheme = false;
             this.swb_capture.ManualInvert = false;
             this.swb_capture.ManualThemeColor = false;
@@ -462,9 +462,9 @@
             this.firstLabel6.Name = "firstLabel6";
             this.firstLabel6.ReverseDarkTheme = false;
             this.firstLabel6.ReverseInvertAction = false;
-            this.firstLabel6.Size = new System.Drawing.Size(250, 32);
+            this.firstLabel6.Size = new System.Drawing.Size(299, 32);
             this.firstLabel6.TabIndex = 0;
-            this.firstLabel6.Text = "Operation confirmation";
+            this.firstLabel6.Text = "Destination language popup";
             this.firstLabel6.ThemeColor = System.Drawing.Color.Empty;
             // 
             // swb_operationConfirm
@@ -473,7 +473,7 @@
             this.swb_operationConfirm.DarkTheme = false;
             this.swb_operationConfirm.Enable = false;
             this.swb_operationConfirm.Inverted = false;
-            this.swb_operationConfirm.Location = new System.Drawing.Point(274, 14);
+            this.swb_operationConfirm.Location = new System.Drawing.Point(323, 14);
             this.swb_operationConfirm.ManualDarkTheme = false;
             this.swb_operationConfirm.ManualInvert = false;
             this.swb_operationConfirm.ManualThemeColor = false;
